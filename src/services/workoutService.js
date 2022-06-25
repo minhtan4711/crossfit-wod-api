@@ -1,4 +1,5 @@
 // add data services to the service
+const { v4: uuid } = require('uuid')
 const Workout = require("../database/Workout")
 
 const getAllWorkouts = () => {
@@ -6,20 +7,29 @@ const getAllWorkouts = () => {
     return allWorkouts
 }
 
-const getOneWorkout = () => {
-    return
+const getOneWorkout = (workoutId) => {
+    const workout = Workout.getOneWorkout(workoutId)
+    return workout
 }
 
-const createNewWorkout = () => {
-    return
+const createNewWorkout = (newWorkout) => {
+    const workoutToInsert = {
+        ...newWorkout,
+        id: uuid(),
+        createdAt: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
+        updatedAt: new Date().toLocaleString("en-US", { timeZone: "UTC" }),
+    }
+    const createWorkout = Workout.createNewWorkout(workoutToInsert)
+    return createWorkout
 }
 
-const updateOneWorkout = () => {
-    return
+const updateOneWorkout = (workoutId, changes) => {
+    const updateWorkout = Workout.updateOneWorkout(workoutId, changes)
+    return updateWorkout
 }
 
-const deleteOneWorkout = () => {
-    return
+const deleteOneWorkout = (workoutId) => {
+    Workout.deleteOneWorkout(workoutId)
 }
 
 module.exports = {
