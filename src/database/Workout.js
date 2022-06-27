@@ -6,6 +6,7 @@ const getAllWorkouts = () => {
 }
 
 const getOneWorkout = (workoutId) => {
+    // connect with DB and get data
     const workout = DB.workouts.find((workout) => workout.id === workoutId);
     if (!workout) {
         return;
